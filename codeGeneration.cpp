@@ -344,6 +344,7 @@ void codeGenerate(Node *root, fstream &outFile) {
          * BR In
          * Out: STOP
          * x 0 */
+
         outFile<<"\nIN:\t";
         outFile <<"NOOP\n";
         codeGenerate(root->child3, outFile);
@@ -353,7 +354,7 @@ void codeGenerate(Node *root, fstream &outFile) {
         codeGenerate(root->child1,outFile);
         //outFile<<"\nSTORE\t"<<arg;
         outFile <<"\nSUB\t\t"<<arg;
-        codeGenerate(root->child2, outFile); //BRPOZ
+        codeGenerate(root->child2, outFile); //BRZNEG
         //outFile<<"OUT\t";
         codeGenerate(root->child4,outFile);
 //        outFile <<"NOOP\n";
@@ -376,9 +377,9 @@ void codeGenerate(Node *root, fstream &outFile) {
         if(root->child2==NULL){
             if (root->child1->token.tokenInstant == "<"){
                 //outFile << "\nBRNEG\t"+	string(label2);
-                outFile << "\nBRNEG\tOUT";
+                outFile << "\nBRZNEG\tOUT";
             }else if(root->child1->token.tokenInstant == ">"){
-                outFile << "\nBRPOS\tOUT";
+                outFile << "\nBRZNEG\tOUT";
             }else if(root->child1->token.tokenInstant == "="){
                 outFile << "\nBRZERO\tOUT";
 
