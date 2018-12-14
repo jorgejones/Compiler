@@ -10,9 +10,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="327142ee-fb5a-460e-a0f8-f368cadf4eff" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/codeGeneration.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/codeGeneration.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/file.asm" beforeDir="false" afterPath="$PROJECT_DIR$/file.asm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/parser.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/parser.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test0.fs18" beforeDir="false" afterPath="$PROJECT_DIR$/test0.fs18" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -25,58 +25,51 @@
     <session id="-707720962">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
+          <entry key="project.closed" value="1" />
           <entry key="project.open.time.15" value="1" />
           <entry key="project.opened" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
+          <entry key="VirtMach" value="1" />
           <entry key="asm" value="1" />
           <entry key="cpp" value="2" />
-          <entry key="fs18" value="4" />
+          <entry key="fs18" value="5" />
           <entry key="h" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Assembly file" value="1" />
+          <entry key="Assembly file" value="2" />
           <entry key="ObjectiveC" value="4" />
-          <entry key="PLAIN_TEXT" value="4" />
+          <entry key="PLAIN_TEXT" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="asm" value="4" />
-          <entry key="cpp" value="1243" />
-          <entry key="fs18" value="12" />
+          <entry key="cpp" value="1503" />
+          <entry key="fs18" value="17" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Assembly file" value="4" />
           <entry key="Doxygen file" value="1" />
-          <entry key="ObjectiveC" value="1242" />
-          <entry key="PLAIN_TEXT" value="12" />
+          <entry key="ObjectiveC" value="1502" />
+          <entry key="PLAIN_TEXT" value="17" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/codeGeneration.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-143">
-              <caret line="352" column="39" lean-forward="true" selection-start-line="352" selection-start-column="39" selection-end-line="352" selection-end-column="39" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/parser.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="366">
-              <caret line="829" column="5" selection-start-line="800" selection-start-column="5" selection-end-line="829" selection-end-column="5" />
+            <state relative-caret-position="244">
+              <caret line="421" column="26" lean-forward="true" selection-start-line="421" selection-start-column="26" selection-end-line="421" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -90,7 +83,7 @@
         <entry file="file://$PROJECT_DIR$/node.h">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="210">
-              <caret line="14" column="22" lean-forward="true" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
+              <caret line="14" column="22" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -98,8 +91,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test0.fs18">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" column="9" selection-start-line="1" selection-start-column="9" selection-end-line="1" selection-end-column="9" />
+            <state relative-caret-position="60">
+              <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -107,8 +100,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/file.asm">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="15" column="10" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
+            <state relative-caret-position="300">
+              <caret line="20" column="8" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -117,8 +110,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>block</find>
-      <find>mStat</find>
       <find>stat</find>
       <find>&quot;M&quot;</find>
       <find>ident</find>
@@ -145,8 +136,10 @@
       <find>COND</find>
       <find>index</find>
       <find>word</find>
-      <find>needpush</find>
       <find>label</find>
+      <find>needpush</find>
+      <find>cond</find>
+      <find>no</find>
     </findStrings>
     <replaceStrings>
       <replace>STORE</replace>
@@ -162,10 +155,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/test0.fs18" />
-        <option value="$PROJECT_DIR$/codeGeneration.cpp" />
-        <option value="$PROJECT_DIR$/file.asm" />
         <option value="$PROJECT_DIR$/parser.cpp" />
+        <option value="$PROJECT_DIR$/test0.fs18" />
+        <option value="$PROJECT_DIR$/file.asm" />
+        <option value="$PROJECT_DIR$/codeGeneration.cpp" />
       </list>
     </option>
   </component>
@@ -227,23 +220,22 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1544724196974</updated>
-      <workItem from="1544724199173" duration="25040000" />
+      <workItem from="1544724199173" duration="34962000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25040000" />
+    <option name="totallyTimeSpent" value="34962000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12035541" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18578352" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" visible="true" weight="0.27534246" />
+      <window_info active="true" anchor="bottom" id="Terminal" visible="true" weight="0.31643835" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -265,13 +257,23 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/VirtMach">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/parser.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2599">
+          <caret line="831" column="50" selection-start-line="831" selection-start-column="50" selection-end-line="831" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/test1.fs18">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/node.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
-          <caret line="14" column="22" lean-forward="true" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
+          <caret line="14" column="22" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
         </state>
       </provider>
     </entry>
@@ -280,29 +282,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test0.fs18">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="9" selection-start-line="1" selection-start-column="9" selection-end-line="1" selection-end-column="9" />
+        <state relative-caret-position="60">
+          <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/file.asm">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="10" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
+        <state relative-caret-position="300">
+          <caret line="20" column="8" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/codeGeneration.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-143">
-          <caret line="352" column="39" lean-forward="true" selection-start-line="352" selection-start-column="39" selection-end-line="352" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/parser.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="366">
-          <caret line="829" column="5" selection-start-line="800" selection-start-column="5" selection-end-line="829" selection-end-column="5" />
+        <state relative-caret-position="244">
+          <caret line="421" column="26" lean-forward="true" selection-start-line="421" selection-start-column="26" selection-end-line="421" selection-end-column="26" />
         </state>
       </provider>
     </entry>
