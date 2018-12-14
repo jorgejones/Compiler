@@ -1,0 +1,22 @@
+Starting without the parse tree. Have your parses generate error (line number
+ and tokens involved) or print OK message upon successful parse.
+For each <nonterminal>, use a void function named after the nonterminal and
+use only explicit returns. Decide how to pass the token. Have the main program
+call the parser, after setting up the scanner if any.
+Be systematic: assume each function starts with unconsumed token (not matched
+yet) and returns unconsumed token. Use version control and be ready to revert
+if something gets messed up.
+Only after completing and testing the above to satisfaction,
+modify each function to build a subtree, and return its root node.
+Assume each function builds just the root and connects its subtrees.
+Modify the main function to receive the tree built in the parser,
+and then display it (for testing) using the preorder treePrint().
+Some hints for tree:
+
+every node should have a label consistent with the name of the function
+creating it (equal the name?)
+every function creates exactly one tree node (or possibly none)
+the number of children seems as 3 or 4 max but it is your decision
+all syntactic tokens can be thrown away, all other tokens (operators,
+IDs, Numbers) need to be stored
+when storing a token, you may need to make a copy depending on your interface
