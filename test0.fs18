@@ -1,16 +1,4 @@
 void
-let x = 0
-let y = 0
 begin
-  read ( x ) :
-  iter ( x > 0 )
-  begin
-    y = x :
-    iter ( y > = 0 )
-    begin
-      print ( y ) :
-      y = y - 1 :
-    end
-    x = x - 1 :
-  end
+  print ( 11 ) :
 end

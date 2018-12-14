@@ -9,7 +9,11 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="327142ee-fb5a-460e-a0f8-f368cadf4eff" name="Default Changelist" comment="" />
+    <list default="true" id="327142ee-fb5a-460e-a0f8-f368cadf4eff" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parser.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/parser.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test0.fs18" beforeDir="false" afterPath="$PROJECT_DIR$/test0.fs18" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,14 +44,14 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="cpp" value="1118" />
+          <entry key="cpp" value="1126" />
           <entry key="fs18" value="11" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Doxygen file" value="1" />
-          <entry key="ObjectiveC" value="1117" />
+          <entry key="ObjectiveC" value="1125" />
           <entry key="PLAIN_TEXT" value="11" />
         </counts>
       </usages-collector>
@@ -58,17 +62,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/codeGeneration.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="308" column="15" selection-start-line="308" selection-start-column="15" selection-end-line="308" selection-end-column="15" />
+            <state relative-caret-position="2497">
+              <caret line="254" column="53" selection-start-line="254" selection-start-column="53" selection-end-line="254" selection-end-column="53" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/parser.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="127">
-              <caret line="347" column="8" selection-start-line="347" selection-start-column="8" selection-end-line="347" selection-end-column="8" />
+            <state relative-caret-position="142">
+              <caret line="900" column="20" selection-start-line="900" selection-start-column="12" selection-end-line="900" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -76,16 +80,16 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test0.fs18">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="6" lean-forward="true" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
+            <state relative-caret-position="45">
+              <caret line="3" column="3" selection-start-line="3" selection-start-column="3" selection-end-line="3" selection-end-column="3" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/file.asm">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1126">
+            <state relative-caret-position="414">
               <caret line="77" lean-forward="true" selection-start-line="77" selection-end-line="77" />
             </state>
           </provider>
@@ -101,7 +105,6 @@
       <find>block</find>
       <find>mStat</find>
       <find>stat</find>
-      <find>cout &lt;&lt;</find>
       <find>&quot;M&quot;</find>
       <find>ident</find>
       <find>varFlag</find>
@@ -113,21 +116,29 @@
       <find>tk = scanner(inFile);</find>
       <find>verify</find>
       <find>R</find>
-      <find>child3:</find>
       <find>index</find>
+      <find>child3:</find>
+      <find>cout &lt;&lt; &quot;</find>
+      <find>cout &lt;&lt;</find>
+      <find>cout</find>
     </findStrings>
     <replaceStrings>
       <replace>STORE</replace>
       <replace>SUB</replace>
       <replace>&quot;\tchild</replace>
+      <replace>//cout &lt;&lt;</replace>
+      <replace>//cout</replace>
     </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/file.asm" />
-        <option value="$PROJECT_DIR$/test0.fs18" />
         <option value="$PROJECT_DIR$/codeGeneration.cpp" />
+        <option value="$PROJECT_DIR$/test0.fs18" />
         <option value="$PROJECT_DIR$/parser.cpp" />
       </list>
     </option>
@@ -142,6 +153,7 @@
     <option name="width" value="638" />
     <option name="height" value="800" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -189,15 +201,16 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1544724196974</updated>
-      <workItem from="1544724199173" duration="17012000" />
+      <workItem from="1544724199173" duration="18096000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17012000" />
+    <option name="totallyTimeSpent" value="18096000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12035541" />
@@ -226,31 +239,31 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/codeGeneration.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="308" column="15" selection-start-line="308" selection-start-column="15" selection-end-line="308" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/parser.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="347" column="8" selection-start-line="347" selection-start-column="8" selection-end-line="347" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test0.fs18">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="6" lean-forward="true" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
+        <state relative-caret-position="45">
+          <caret line="3" column="3" selection-start-line="3" selection-start-column="3" selection-end-line="3" selection-end-column="3" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/file.asm">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1126">
+        <state relative-caret-position="414">
           <caret line="77" lean-forward="true" selection-start-line="77" selection-end-line="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/codeGeneration.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2497">
+          <caret line="254" column="53" selection-start-line="254" selection-start-column="53" selection-end-line="254" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/parser.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="900" column="20" selection-start-line="900" selection-start-column="12" selection-end-line="900" selection-end-column="20" />
         </state>
       </provider>
     </entry>

@@ -136,7 +136,7 @@ void codeGenerate(Node *root, fstream &outFile) {
         cout << "IN";
 		
 		
-			cout<<"in here now";
+			//cout <<<<"in here now";
         //codeGenerate(root->child1, outFile);
 		strcpy(argR,newName(VAR));
         outFile << "\nREAD\t"<<argR << endl;
@@ -145,7 +145,7 @@ void codeGenerate(Node *root, fstream &outFile) {
 			outFile<<"\nPUSH\t";
 			outFile<<"\nSTACKW\t"<<root->index[0];
 		}
-		cout<<"made it to the bottom";
+		//cout <<<<"made it to the bottom";
 		
 		
 		return;

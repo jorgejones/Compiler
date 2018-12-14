@@ -110,11 +110,11 @@ Node* block(ifstream &inFile){
         tk = scanner(inFile);
 		node->child1 = vars(inFile);
 		node->child2 = stats(inFile);
-        cout << "Block function2: " << tk.tokenInstant <<endl;
+        //cout"Block function2: " << tk.tokenInstant <<endl;
 		if (tk.tokenInstant != "end")
 			error(tk);
 		else {
-		    cout << varCount <<endl;
+		    //coutvarCount <<endl;
     	    blockVarCount = varCount;
 		    while(blockVarCount > 0){
 
@@ -123,7 +123,7 @@ Node* block(ifstream &inFile){
 		    }
 		    //varCount = 0;
 		    tk = scanner(inFile);
-            //cout << "Block function3: " << tk.tokenInstant <<endl;
+            ////cout"Block function3: " << tk.tokenInstant <<endl;
 		    //remove(varCount);
             return node;
         }
@@ -214,10 +214,10 @@ Node* expr(ifstream &inFile){
     //tk = scanner(inFile);
 
     //cout << "expr function " << tk.tokenInstant <<endl;
-	cout<<" \nthe token instance in exp  is "<<tk.tokenInstant<<"\n";
+	//cout<<" \nthe token instance in exp  is "<<tk.tokenInstant<<"\n";
 
     node->child1 = A(inFile);
-	cout<<" \nthe token instance in exp  is "<<tk.tokenInstant<<"\n";
+	//cout<<" \nthe token instance in exp  is "<<tk.tokenInstant<<"\n";
 
     //tk = scanner(inFile);
    // cout << "expr function2 " << tk.tokenInstant <<endl;
@@ -260,9 +260,9 @@ Node* A(ifstream &inFile) {
 	// node = NULL;
 	node->label = "A";
     //cout << "A function " << tk.tokenInstant << endl;
-	cout<<" \nthe token instance in o  is "<<tk.tokenInstant<<"\n";
+	//cout<<" \nthe token instance in o  is "<<tk.tokenInstant<<"\n";
     node->child1=M(inFile);
-	cout<<" \nthe token instance in o  is "<<tk.tokenInstant<<"\n";
+	//cout<<" \nthe token instance in o  is "<<tk.tokenInstant<<"\n";
 
    // tk = scanner(inFile);
     //cout << "A function2 " << tk.tokenInstant << endl;
@@ -289,7 +289,7 @@ Node* A(ifstream &inFile) {
 /*          M function
  *          - <M> |  <R>   */
 Node* M(ifstream &inFile) {
-	cout<<" \nthe token instance in M is "<<tk.tokenInstant<<"\n";
+	//cout<<" \nthe token instance in M is "<<tk.tokenInstant<<"\n";
     //file.open("file.asm",fstream::out);
 	Node *node = new Node;
 	// node = NULL;
@@ -320,7 +320,7 @@ Node* R(ifstream &inFile){
 	node->label = "R";
     //tk = scanner(inFile);
     //cout << "R function " << tk.tokenInstant <<endl;
-	cout<<" \nthe token instance in R is "<<tk.tokenInstant<<"\n";
+	//cout<<" \nthe token instance in R is "<<tk.tokenInstant<<"\n";
 	
     if (tk.tokenInstant == "(") {
         tk = scanner(inFile);
@@ -453,7 +453,7 @@ Node* in(ifstream &inFile){
 				error(tk);
 			else{
 				int n=find(tk.tokenInstant);
-				cout<<" n right now is "<<n<<endl;
+				//cout<<" n right now is "<<n<<endl;
 				node->index.push_back(n);
                 if(n < 0)
                     verify(tk.tokenInstant);
@@ -779,10 +779,10 @@ bool verify(string str){
         return true;
     }
     else {
-        cout << "verify";
+        //cout << "verify";
 		for (std::vector<string>::const_iterator i = global.begin(); i != global.end(); ++i)
 			std::cout << "global vector: " << *i << ' ';
-        cout << "Global scoping issues with using var: " << str << endl;
+        //cout << "Global scoping issues with using var: " << str << endl;
         error(tk);
 
     }
@@ -795,8 +795,8 @@ void push(string str){
 }
 
 void pop(){
-	for (std::vector<string>::const_iterator i = global.begin(); i != global.end(); ++i)
-		std::cout << "global vector: " << *i << ' ';
+	//for (std::vector<string>::const_iterator i = global.begin(); i != global.end(); ++i)
+	//	std::cout << "global vector: " << *i << ' ';
     global.pop_back();
 }
 int find(string str){
