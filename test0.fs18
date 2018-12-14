@@ -1,4 +1,7 @@
 void
+let x = 0
 begin
-  print ( 11 ) :
+  read ( x ) :
+  cond ( x > 0 )
+    print ( x ) :
 end

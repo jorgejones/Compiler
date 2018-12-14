@@ -155,8 +155,9 @@ void codeGenerate(Node *root, fstream &outFile) {
         cout << "OUT";
 		strcpy(argR,newName(VAR));
 		string arg=argR;
-		if(root->child1!=NULL)
+		//if(root->child1!=NULL)
         codeGenerate(root->child1, outFile);
+		cout << "\tchild1: " << root->child1->label <<"\n";
 		strcpy(argR,Name);
         outFile << "\nSTORE\t"<<argR << endl;
         outFile << "\nWRITE\t"<< argR << endl;
@@ -167,29 +168,30 @@ void codeGenerate(Node *root, fstream &outFile) {
     {
 		
         cout << "COND";
-		
+		string mylabel=label2;
 		strcpy(label2,newName(LABEL));
-		outFile<<"\n"<<label2<<":\tNOOP";
-		if(root->child1!=NULL)
-        codeGenerate(root->child1, outFile);
+		outFile<<"\n"<<label2<<":\t\tNOOP";
+		if(root->child2!=NULL)
+        codeGenerate(root->child2, outFile);
 		strcpy(argR,newName(VAR));
 		string arg=argR;
-		codeGenerate(root->child2, outFile);
-		outFile<<"\nSTORE\t"<<argR;
+		codeGenerate(root->child1, outFile);
+		cout << "\t****child2: " << root->child1->label <<"\n";
+		outFile<<"\nSTORE\t"<<arg;
 		
 		codeGenerate(root->child3, outFile);
+		cout << "\t***child3: " << root->child3->label <<"\n";
 		outFile<<"\nSUB\t"<<arg;
 		
 		for(int i=0;i<word.size();i++){
 			outFile<<"\n"<<word[i]<<"\t"<<label2;
 		}
+		codeGenerate(root->child4,outFile);
 		word.clear();
-		
-		
-		
-		codeGenerate(root->child4, outFile);
-		
-		
+
+
+		outFile<<"\nBR"<< ": STOP";
+
 		return;
 
     }
@@ -248,7 +250,7 @@ else if (root->label == "M") {
 			codeGenerate(root->child1, outFile);
 			cout << "\tchild1: " << root->child1->label <<"\n";
 		}
-		else if(root->child1->label == "-"){
+		else if(root->child1->label == "negative"){
 
 			cout << "\tchild1: " << root->child1->label <<"\n";
 			codeGenerate(root->child2, outFile);

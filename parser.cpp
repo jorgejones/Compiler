@@ -798,36 +798,36 @@ void pop(){
 	//for (std::vector<string>::const_iterator i = global.begin(); i != global.end(); ++i)
 	//	std::cout << "global vector: " << *i << ' ';
     global.pop_back();
-}
-int find(string str){
+    }
+    int find(string str){
 
-    int count = 0;
-	string temp[count];
-    //cout << "string in find " <<  str <<endl;
-    vector<string>::iterator it;
-    it =(find (global.begin(),global.end(),str));
-    if(it != global.end()){
-        while (global.back() != str)
-        {
-        	if(global.back() != str) {
-				temp[count] = global.back();
-			}
+        int count = 0;
+        string temp[count];
+        //cout << "string in find " <<  str <<endl;
+        vector<string>::iterator it;
+        it =(find (global.begin(),global.end(),str));
+        if(it != global.end()){
+            while (global.back() != str)
+            {
+                if(global.back() != str) {
+                    temp[count] = global.back();
+                }
 
-            pop();
-            count++;
+                pop();
+                count++;
+            }
+            for(int i = 0; i < count; i++){
+                global.push_back(temp[0]);
+            }
+
+            //cout << count << endl;
+            return count;
         }
-		for(int i = 0; i < count; i++){
-			global.push_back(temp[0]);
-		}
-
-        //cout << count << endl;
-        return count;
+        else{
+            //cout << "Couldnt find " << str << endl;
+            return -1;
+        }
     }
-    else{
-        //cout << "Couldnt find " << str << endl;
-        return -1;
-    }
-}
 
 //static void recGen(Node *stats,fstream &outFile)
 //{
