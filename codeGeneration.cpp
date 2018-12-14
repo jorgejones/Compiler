@@ -312,13 +312,7 @@ void codeGenerate(Node *root, fstream &outFile) {
             codeGenerate(root->child1, outFile);
             cout << "\tchild1: " << root->child1->label <<"\n";
         }
-        else if(root->child2!=NULL){
-            codeGenerate(root->child2, outFile);
-            cout << "\tchild2: " << root->child1->label <<"\n";
-        }
-
         else if(root->child3!=NULL){
-            cout << "\tchild3: " << root->child3->label <<"\n";
             cout << "\tchild3: " << root->child3->label <<"\n";
             outFile<<"\nSTACKR\t"<<root->index[0];
 
@@ -338,40 +332,37 @@ void codeGenerate(Node *root, fstream &outFile) {
     }else if (root->label == "loop")
     {
 
-        cout << "LOOP";
-
-//		strcpy(label2,newName(LABEL));
-//		string mylabel=label2;
-//		strcpy(label2,newName(LABEL));
-//		string mylabel2=label2;
-//		//outFile<<"\n"<<mylabel<<": NOOP\n";  //loop condition
-//		cout << "\tchild1: " << root->child1->label <<"\n";
-        codeGenerate(root->child3, outFile);  //x
+        /* READ x
+         *  In:
+         * LOAD x
+         * SUB 1
+         * STORE x
+         * BRNEG Out
+         * WRITE x
+         * LOAD x
+         * SUB 1
+         * BR In
+         * Out: STOP
+         * x 0 */
+        outFile<<"\nIN:\t";
+        outFile <<"NOOP\n";
+        codeGenerate(root->child3, outFile);
         strcpy(argR,newName(VAR));
         string arg=argR;
-        outFile<<"\nSTORE\t"<<arg; //x
-        codeGenerate(root->child1, outFile);
-        outFile<<"\nSUB\t"<<arg;
-        //cout << "\tchild2: " << root->child2->label <<"\n";
-        codeGenerate(root->child2, outFile);  //operator
-        outFile <<"\tHELLO\n";
-        outFile <<"\tNOOP\n";
-//		strcpy(argR,newName(VAR));
-//		string arg2=argR;
-//		outFile<<"\nSTORE\t"<<arg2; // store operator??
-        //cout << "\tchild3: " << root->child2->label <<"\n";
-        codeGenerate(root->child4, outFile); // s
-        outFile<<"\nSUB\t"<<arg;
-//		for(int i=0;i<word.size();i++){
-//			outFile<<"\n "<<word[i]<<"\t"<<label2;
-//		}
+        outFile<<"\nSTORE\t"<<arg;
+        codeGenerate(root->child1,outFile);
+        //outFile<<"\nSTORE\t"<<arg;
+        outFile <<"\nSUB\t\t"<<arg;
+        codeGenerate(root->child2, outFile); //BRPOZ
+        //outFile<<"OUT\t";
         codeGenerate(root->child4,outFile);
-        //word.clear();
-
-
-        //	outFile<<"\nBR\t"<<mylabel;
-        //	outFile<<"\n"<<mylabel2<<":  NOOP\n";
-
+//        outFile <<"NOOP\n";
+        outFile<<"\nBR\tIN";
+       // outFile<<"\nIN:\t";
+       // outFile <<"NOOP\n";
+        outFile<<"\nOUT:\t";
+        outFile <<"NOOP\n";
+        codeGenerate(root->child4,outFile);
 
         return;
 
@@ -379,7 +370,7 @@ void codeGenerate(Node *root, fstream &outFile) {
     {
         string string1;
         string string2;
-
+        cout <<"RO";
         cout << "\tchild1: " << root->child1->label <<"\n";
         //cout << "\tchild2: " << root->child2->label <<"\n";
         if(root->child2==NULL){

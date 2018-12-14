@@ -2,6 +2,9 @@ void
 let x = 0
 begin
   read ( x ) :
-  cond( x > 0 )
+  iter ( x > 0 )
+  begin
     print ( x ) :
+    x = x - 2 :
+  end
 end
