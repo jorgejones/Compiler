@@ -43,9 +43,14 @@ static char *newName(nameType what)
     return(Name);
 }
 
+
+vector<int> blockv;
+int blockvindex=0;
+
         /* Parser function */
 
 Node* parser(ifstream &inFile){
+	
     std::ofstream file ("file.asm");
 	Node *root = new Node;
 	//root_node = NULL;
@@ -53,7 +58,7 @@ Node* parser(ifstream &inFile){
 	//file << "my text here!" << std::endl;
 
 
-	root = program(inFile);
+	root=program(inFile);
     cout << "File parsed! " <<endl;
     file.close();
 
@@ -61,7 +66,16 @@ Node* parser(ifstream &inFile){
 }
 /*      Program function
  *  void <vars><block>      */
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 Node* program(ifstream &inFile){
+	blockv.push_back(0);
+	
 	Node *node = new Node;
 	//node = NULL;
 	node->label = "program";
@@ -75,8 +89,15 @@ Node* program(ifstream &inFile){
 		node -> child1 = vars(inFile);
 		node -> child2 = block(inFile);
 	}
+	//outFile<<"\nSTOP";
 	return node;
 }
+
+
+
+
+
+
 
 
 /*       Error function         */
@@ -87,33 +108,58 @@ void error(Token tk){
 }
 
 
+
+
 /*          Block function      */
 /* BEGIN <vars> <stats> END */
 Node* block(ifstream &inFile){
-	//vector<int>blockCount;
     int blockVarCount= 0;
-    //int index = 0
-    //varCount = 0;
+    
 
 	Node *node = new Node;
-	// node = NULL;
 	node->label = "block";
-	//cout << "Block function: " << tk.tokenInstant <<endl;
+	
+	
 	if (tk.tokenInstant != "begin")
 		error(tk);
 	else
 	{
+		
+		
+		blockvindex++;
+		blockv.push_back(0);
+		
+		
+		/*
 	    scopeFlag = true;
 	    if (varCount > 0)
 	        varFlag = true;
-
+		*/
+		
+		
+		
+		
         tk = scanner(inFile);
 		node->child1 = vars(inFile);
+		
 		node->child2 = stats(inFile);
+		
         //cout"Block function2: " << tk.tokenInstant <<endl;
+		
 		if (tk.tokenInstant != "end")
 			error(tk);
 		else {
+			tk = scanner(inFile);
+			
+			for(int i=0;i<blockv[blockvindex];i++){
+					pop();
+					blockv[blockvindex]--;
+			}
+			
+			blockvindex--;
+			
+			/*
+			//pop number of count
 		    //coutvarCount <<endl;
     	    blockVarCount = varCount;
 		    while(blockVarCount > 0){
@@ -122,14 +168,27 @@ Node* block(ifstream &inFile){
 		        blockVarCount--;
 		    }
 		    //varCount = 0;
-		    tk = scanner(inFile);
+		    
+			
+			*/
+			
             ////cout"Block function3: " << tk.tokenInstant <<endl;
 		    //remove(varCount);
+			
+			
             return node;
         }
 	}
 	return node;
 }
+
+
+
+
+
+
+
+
 
 
 /*          vars function           */
@@ -138,11 +197,11 @@ Node* vars(ifstream &inFile){
    // file.open("file.asm",fstream::out);
     //file();
 	Node *node = new Node;
-	// node = NULL;
 	node->label = "vars";
-	//tk = scanner(inFile);
-	//cout << "vars function " << tk.tokenInstant <<endl;
+	   
+	   
 	if(tk.tokenInstant == "let") {
+		
 		tk = scanner(inFile);
 		//cout << "vars function2 " << tk.tokenInstant <<endl;
 			if (tk.tokenID != "varToken") {
@@ -150,19 +209,16 @@ Node* vars(ifstream &inFile){
 			}
 		else
 			{
-		    if(scopeFlag){
-		        if(find(tk.tokenInstant) > 0 && find(tk.tokenInstant) < varCount) {
-		            error(tk);
+				//needs scoping
+		        if(find(tk.tokenInstant) >= 0) {
+					insert(tk.tokenInstant);
                 }
 		        else {
-					node->needpush.push_back(tk.tokenInstant);
+					//node->needpush.push_back(tk.tokenInstant);
                     push(tk.tokenInstant);
-                    varCount++;
+                    blockv[blockvindex]++;
                 }
-		    }
-		    else
-		        insert(tk.tokenInstant);
-
+					
 			node->child1 = new Node;
 			node->child1->label = "Identifier";
 			node->child1->token = tk;
@@ -174,11 +230,10 @@ Node* vars(ifstream &inFile){
 			}
 
 			else {
-				node->child2 = new Node;
-				node->child2->label = "Operator";
+				node ->child2 = new Node;
+				node ->child2->label = "Operator";
 				node->child2->token = tk;
 				tk = scanner(inFile);
-				//cout << "vars function4 " << tk.tokenInstant <<endl;
 				if (tk.tokenID != "digitToken")
 					error(tk);
 				else {
@@ -186,13 +241,8 @@ Node* vars(ifstream &inFile){
 					node ->child3->label = "digit Token";
 					node->child3->token = tk;
 					tk = scanner(inFile);
-					//cout << "**var made**" <<endl;
-                    //node ->child4 = new Node;
-                    //node ->child4->label = "var";
                     node ->child4 = vars(inFile);
-                    //if(scopeFlag)
-                      //  varFlag = true;
-                    //return node;
+                    
 				}
 			}
 
@@ -207,9 +257,7 @@ Node* vars(ifstream &inFile){
 /* <A> / <expr> | <A> * <expr> | <A>           */
 Node* expr(ifstream &inFile){
 
-    //file();
 	Node *node = new Node;
-	// node = NULL;
 	node->label = "expr";
     //tk = scanner(inFile);
 
@@ -217,35 +265,15 @@ Node* expr(ifstream &inFile){
 	//cout<<" \nthe token instance in exp  is "<<tk.tokenInstant<<"\n";
 
     node->child1 = A(inFile);
-	//cout<<" \nthe token instance in exp  is "<<tk.tokenInstant<<"\n";
-
-    //tk = scanner(inFile);
-   // cout << "expr function2 " << tk.tokenInstant <<endl;
 
     if((tk.tokenInstant == "/")||(tk.tokenInstant == "*")){
 		node->child2 = new Node;
 		node->child2->label = "Operator";
 		node->child2->token = tk;
-        /*  p4 code generation */
-
+		
         tk = scanner(inFile);
-        //cout << "expr function3 " << tk.tokenInstant <<endl;
         node->child3 = expr(inFile);
-        //strcpy (argR,newName(VAR));
-        //file << "\nSTORE\t";
-        if ((node->child2->token.tokenInstant == "/")){
-            //file << "EXPR\n";
-            //file << "DIV " << tempTk.tokenInstant;
-            //file();
-
-        }
-        else if((node->child2->token.tokenInstant == "*")) {
-            //file << "MULT "<< tempTk.tokenInstant << endl;
-            //file();
-            return node;
-        }
     }
-    //file();
     return node;
 
 }
@@ -254,18 +282,12 @@ Node* expr(ifstream &inFile){
 /*          A function           */
 /*  <M> + <A> | <M> - <A> | <M>   */
 Node* A(ifstream &inFile) {
-   // file.open("file.asm",fstream::out);
-    //tk = scanner(inFile);
+   
 	Node *node = new Node;
-	// node = NULL;
 	node->label = "A";
-    //cout << "A function " << tk.tokenInstant << endl;
-	//cout<<" \nthe token instance in o  is "<<tk.tokenInstant<<"\n";
+    
     node->child1=M(inFile);
-	//cout<<" \nthe token instance in o  is "<<tk.tokenInstant<<"\n";
-
-   // tk = scanner(inFile);
-    //cout << "A function2 " << tk.tokenInstant << endl;
+	
 
     if ((tk.tokenInstant == "+") || (tk.tokenInstant == "-"))
     {
@@ -273,12 +295,8 @@ Node* A(ifstream &inFile) {
 		node->child2->label = "Operator";
     	node->child2->token = tk;
     	tempTk = node->child1->token;
-    	//if(tempTk.tokenInstant == "+")
-            //file << "ADD " << tempTk.tokenInstant << endl;
-    	//else
-    	    //file << "SUB " << tempTk.tokenInstant << endl;
         tk = scanner(inFile);
-        //cout << "A function3 " << tk.tokenInstant << endl;
+		
         node->child3 = A(inFile);
     }
 
@@ -298,16 +316,14 @@ Node* M(ifstream &inFile) {
     //cout << "M function " << tk.tokenInstant << endl;
     if (tk.tokenInstant == "-"){
 		node->child1 = new Node;
-		node->child1->label = "negative";
+		node->child1->label = "-";
     	node->child1->token = tk;
         tk = scanner(inFile);
-        //file << "READ\t-1\t"<<endl;
-        //cout << "M function2 " << tk.tokenInstant << endl;
+
         node->child2= M(inFile);
-        //file << "MULT " << node->child2 << endl;
     }
     else
-        node->child1=R(inFile);
+        node->child3=R(inFile);
     return node;
 }
 
@@ -315,41 +331,38 @@ Node* M(ifstream &inFile) {
 /*          R function
  *       ( <expr> ) | Identifier | Integer */
 Node* R(ifstream &inFile){
-    //file.open("file.asm",fstream::out);
 	Node *node = new Node;
 	node->label = "R";
-    //tk = scanner(inFile);
-    //cout << "R function " << tk.tokenInstant <<endl;
-	//cout<<" \nthe token instance in R is "<<tk.tokenInstant<<"\n";
+   
 	
     if (tk.tokenInstant == "(") {
         tk = scanner(inFile);
         node->child1 = expr(inFile);
-        //tk = scanner(inFile);
-        //cout << "R function2: " << tk.tokenInstant <<endl;
 
         if(tk.tokenInstant != ")")
             error(tk);
         else {
-            //cout << "R function3: " << tk.tokenInstant <<endl;
             tk = scanner(inFile);
-            //node->child2->token = tk;
             return node;
         }
     }
     else if (tk.tokenID == "varToken")
     {
-        if(find(tk.tokenInstant) < 1)
+        if(find(tk.tokenInstant) < 1)	
             verify(tk.tokenInstant);
-       // verify(tk.tokenInstant);
+		
 		node ->child3 = new Node;
 		node ->child3->label = "Identifier";
     	node->child3->token = tk;
+		
 		int n=find(tk.tokenInstant);
-		node->index.push_back(n);
+		if(node->index.empty())
+			node->index.push_back(n);	
+		else
+			node->index[0]=n;
+		
         tk = scanner(inFile);
-        //file << "MULT " << tempTk.tokenInstant << endl;
-        //cout << "R function3 " << tk.tokenInstant <<endl;
+        
         return node;
     }
     else if (tk.tokenID == "digitToken") {
@@ -357,7 +370,6 @@ Node* R(ifstream &inFile){
 		node ->child4->label = "Digit";
 		node->child4->token = tk;
         tk = scanner(inFile);
-        //cout << "R function4 " << tk.tokenInstant <<endl;
         return node;
     }
 	return node;
@@ -367,11 +379,11 @@ Node* R(ifstream &inFile){
 /*          stats function
  *           <stat>  <mStat>        */
 Node* stats(ifstream &inFile){
+	
 	Node *node = new Node;
-	// node = NULL;
 	node->label = "stats";
-	//cout << "stats function " << tk.tokenInstant <<endl;
 	node->child1 = stat(inFile);
+	
 	node->child2 = mStat(inFile);
 	return node;
 
@@ -382,35 +394,30 @@ Node* stats(ifstream &inFile){
  *            empty |  <stat>  <mStat> */
 Node* mStat(ifstream &inFile){
 	Node *node = new Node;
-	// node = NULL;
 	node->label = "mStat";
-	//tk = scanner(inFile);
 
-	//cout << "mStat function " << tk.tokenInstant <<endl;
-//  //  if(tk.tokenInstant == "end")
-//    //    return node;
+	
     if((tk.tokenInstant == "read")||(tk.tokenInstant == "print")||(tk.tokenInstant == "cond")
 	||(tk.tokenInstant == "iter")||(tk.tokenID == "varToken")||(tk.tokenInstant == "begin"))
 	{
 
 	    node->child1 = stat(inFile);
         node->child2 = mStat(inFile);
-        return node;
 	}
 
 	return node;
 
-
 }
+
+
+
 
 
 /*          stat function
  *  <in> | <out> | <block> | <if> | <loop> | <assign> */
 Node* stat(ifstream &inFile){
 	Node *node = new Node;
-	// node = NULL;
 	node->label = "stat";
-	//cout << "stat function " << tk.tokenInstant <<endl;
 
 	if(tk.tokenInstant == "read")
 		node->child1 = in(inFile);
@@ -431,55 +438,52 @@ Node* stat(ifstream &inFile){
 }
 
 
+
+
 /*          in function
  *          read(identifier): */
 Node* in(ifstream &inFile){
 	Node *node = new Node;
-	// node = NULL;
 	node->label = "in";
-	//tk = scanner(inFile);
-	//cout << "in function " << tk.tokenInstant <<endl;
+	
+	
+	
 	if(tk.tokenInstant != "read")
 		error(tk);
 	else{
 		tk = scanner(inFile);
-        //cout << "in function2 " << tk.tokenInstant <<endl;
 		if(tk.tokenInstant != "(")
 			error(tk);
 		else{
 			tk = scanner(inFile);
-            //cout << "in function3 " << tk.tokenInstant <<endl;
 			if(tk.tokenID != "varToken")
 				error(tk);
 			else{
 				int n=find(tk.tokenInstant);
-				//cout<<" n right now is "<<n<<endl;
-				node->index.push_back(n);
-                if(n < 0)
+				//cout<<"tk in  in. right now is "<<tk.tokenInstant<<" "<<n<<endl;
+				if(node->index.empty())
+					node->index.push_back(n);	
+				else
+					node->index[0]=n;
+				
+				//cout<<"!!!!!!!"<<node->index[0];
+                if(n > 0)
                     verify(tk.tokenInstant);
+				
 			    //verify(tk.tokenInstant);
 				node->child1 = new Node;
 				node->child1->label = "Identifier";
 				node->child1->token = tk;
-				/*  p4 code generation */
-                //file.open("file.asm",fstream::out);
-				//file << "READ " << tk.tokenInstant << endl;
-
-
-
 
 				tk = scanner(inFile);
-                //cout << "in function4 " << tk.tokenInstant <<endl;
 				if(tk.tokenInstant != ")")
 					error(tk);
 				else{
                     tk = scanner(inFile);
-                    //cout << "in function5 " << tk.tokenInstant <<endl;
 					if(tk.tokenInstant != ":")
 						error(tk);
 					else{
-
-                        //cout << "**Expression read**" << endl;
+						
                         tk = scanner(inFile);
 
 						return node;
@@ -502,31 +506,25 @@ Node* out(ifstream &inFile){
 	Node *node = new Node;
 	// node = NULL;
 	node->label = "out";
-	//cout << "out function " << tk.tokenInstant <<endl;
 	if(tk.tokenInstant != "print")
 		error(tk);
 	else{
 		tk = scanner(inFile);
-		//cout << "out function2 " << tk.tokenInstant <<endl;
+		
 		if(tk.tokenInstant != "(")
 			error(tk);
 		else{
 			tk = scanner(inFile);
-			//cout<<" \nthe token instance in s  is "<<tk.tokenInstant<<"\n";
 			node->child1 = expr(inFile);
-			//cout<<" \nthe token instance in a  is "<<tk.tokenInstant<<"\n";
 
-			//cout << "out function3 " << tk.tokenInstant <<endl;
 			if(tk.tokenInstant != ")")
 				error(tk);
 			else{
 				tk = scanner(inFile);
-				//cout << "out function4 " << tk.tokenInstant <<endl;
 
 				if(tk.tokenInstant != ":")
 					error(tk);
 				else{
-                    //cout << "**Expression printed**"  <<endl;
                     tk = scanner(inFile);
 					return node;
 				}
@@ -542,36 +540,24 @@ Node* out(ifstream &inFile){
 Node* cond(ifstream &inFile){
     //file.open("file.asm",fstream::out);
 	Node *node = new Node;
-	// node = NULL;
 	node->label = "cond";
-	//tk = scanner(inFile);
-	//cout << "cond function " << tk.tokenInstant <<endl;
+	
 	if(tk.tokenInstant != "cond")
 		error(tk);
 	else{
+		
 		tk = scanner(inFile);
-        //cout << "cond function2 " << tk.tokenInstant <<endl;
+		
 		if(tk.tokenInstant != "(")
 			error(tk);
 		else{
             tk = scanner(inFile);
-            //cout << "cond function3 " << tk.tokenInstant <<endl;
 			node->child1 = expr(inFile);
-            //cout << "cond function4 " << tk.tokenInstant <<endl;
+			
 			node->child2 = RO(inFile);
-            //cout << "cond function5 " << tk.tokenInstant <<endl;
+			
 			node->child3 =expr(inFile);
-            //file << "\nSTORE\t" <<node->child3->token.tokenInstant;
-            if(node->child2->token.tokenInstant == "<") {
-                //file << "\nBRPOS\tnode->child2->token.tokenInstant\n";
-                //file << "\nBRZERO\tnode->child2->token.tokenInstant\n";
-            }
-            if(node->child2->token.tokenInstant == "<=") {
-                //file << "\nBRPOS\tnode->child2->token.tokenInstant\n";
-                //file << "\nBRZERO\tnode->child2->token.tokenInstant\n";
-            }
-			//tk = scanner(inFile);
-            //cout << "cond function5 " << tk.tokenInstant <<endl;
+		
 			if(tk.tokenInstant != ")")
 				error(tk);
 			else{
@@ -590,33 +576,28 @@ Node* cond(ifstream &inFile){
  *          iter( <expr> <RO> <expr> ) <stat> */
 Node* loop(ifstream &inFile){
 	Node *node = new Node;
-	// node = NULL;
 	node->label = "loop";
-	//tk = scanner(inFile);
-	//cout << "loop function " << tk.tokenInstant <<endl;
+	
 	if(tk.tokenInstant != "iter")
 		error(tk);
 	else{
 		tk = scanner(inFile);
-        //cout << "loop function2 " << tk.tokenInstant <<endl;
+		
 		if(tk.tokenInstant != "(")
 			error(tk);
 		else{
             tk = scanner(inFile);
-            //cout << "loop function3 " << tk.tokenInstant <<endl;
+			
 			node->child1 = expr(inFile);
-            //cout << "loop function4 " << tk.tokenInstant <<endl;
+			
 			node->child2 = RO(inFile);
-            //cout << "loop function5 " << tk.tokenInstant <<endl;
+			
 			node->child3 = expr(inFile);
-            ////cout << "loop function6 " << tk.tokenInstant <<endl;
-			//tk = scanner(inFile);
-            //cout << "loop function7 " << tk.tokenInstant <<endl;
+			
 			if(tk.tokenInstant != ")")
 				error(tk);
 			else{
                 tk = scanner(inFile);
-                //cout << "**loop condition** " << tk.tokenInstant <<endl;
 				node->child4 = stat(inFile);
 				return node;
 			}
@@ -626,29 +607,43 @@ Node* loop(ifstream &inFile){
 }
 
 
+
  /*         assign function         */
  /*         Identifier = <expr> : */
 Node* assign(ifstream &inFile){
-     //file("file.asm",fstream::out);
 	 Node *node = new Node;
-	 // node = NULL;
 	 node->label = "assign";
-	//tk = scanner(inFile);
-	//cout << "assign function " << tk.tokenInstant <<endl;
+	 
+	 
+	 
 	if(tk.tokenID != "varToken")
 		error(tk);
 	else{
+		
 		int n=find(tk.tokenInstant);
-		node->index.push_back(n);
+		if(node->index.empty())
+			node->index.push_back(n);	
+		else
+			node->index[0]=n;
+		
+		//cout<<"\n  tk  "<<tk.tokenInstant<<" n is "<<n<<"  global at n is "<<global[n]<<endl;
+		/*
+		for(int i=0;i<global.size();i++){
+			cout<<"\n"<<global[i];
+		} */
+		
+		//cout<<"\t\tin assign n is "<<n<<endl;
+		//cout<<"\n\n\n\n Marker\n\n\n\n";
+		
 	    if( n< 1)
-            verify(tk.tokenInstant);
+          verify(tk.tokenInstant);
+		
 		node->child1 = new Node;
 		node->child1->label = "Identifier";
 		node->child1->token = tk;
-        //cout << "\nSTORE\t" <<node->child1->token.tokenInstant;
-        //file << "\nSTORE\t" <<node->child1->token.tokenInstant;
+       
 		tk = scanner(inFile);
-		//cout << "assign function2 " << tk.tokenInstant <<endl;
+		
 		if(tk.tokenInstant != "=")
 			error(tk);
 		else
@@ -657,16 +652,14 @@ Node* assign(ifstream &inFile){
 			node->child2->label = "Operator";
 			node->child2->token = tk;
             tk = scanner(inFile);
-            //out << "assign function3 " << tk.tokenInstant <<endl;
+			
 			node->child3 = expr(inFile);
-			//tk = scanner(inFile);
-			////cout << "assign function3 " << tk.tokenInstant <<endl;
+			
+			
 			if(tk.tokenInstant != ":")
 				error(tk);
 			else{
-                //cout << "**Expression Assigned**" <<endl;
                 tk = scanner(inFile);
-				//return node;
 			}
 
 		}
@@ -676,17 +669,18 @@ Node* assign(ifstream &inFile){
 }
 
 
+
+
 /*             RO function
 *    < | <  = | >  | >  = | =  =  |   =   */
 Node* RO(ifstream &inFile){
-    //file("file.asm",fstream::out);
-    //file();
+    
 	Node *node = new Node;
 	// node = NULL;
 	node->label = "RO";
-	////cout << "RO " << tk.tokenInstant <<endl;
-	//tk = scanner(inFile);
-    //cout << "RO " << tk.tokenInstant <<endl;
+	node->child1=NULL;
+	node->child2=NULL;
+
 	if(tk.tokenInstant == "<")
 	{
 		node->child1 = new Node;
@@ -694,14 +688,13 @@ Node* RO(ifstream &inFile){
 		node->child1->token = tk;
 
 		tk = scanner(inFile);
-        //cout << "RO function 2 " << tk.tokenInstant <<endl;
+		
 		if(tk.tokenInstant == "=")
 		{
 			node->child2 = new Node;
 			node->child2->label = "Operator";
 			node->child2->token = tk;
             tk = scanner(inFile);
-            //cout << "RO function 3 " << tk.tokenInstant <<endl;
             return node;
         }
 		else
@@ -714,13 +707,12 @@ Node* RO(ifstream &inFile){
 		node->child1->label = "Operator";
 		node->child1->token = tk;
 		tk = scanner(inFile);
-        //cout << "RO function 2: " << tk.tokenInstant <<endl;
+		
 		if(tk.tokenInstant == "=") {
 			node->child2 = new Node;
 			node->child2->label = "Operator";
 			node->child2->token = tk;
 		    tk = scanner(inFile);
-            //cout << "RO function 3: " << tk.tokenInstant <<endl;
             return node;
         }
 		else
@@ -732,13 +724,12 @@ Node* RO(ifstream &inFile){
 		node->child1->label = "Operator";
 		node->child1->token = tk;
 		tk = scanner(inFile);
-        //cout << "RO function 2: " << tk.tokenInstant <<endl;
+		
 		if(tk.tokenInstant == "="){
 			node->child2 = new Node;
 			node->child2->label = "Operator";
 			node->child2->token = tk;
 		    tk = scanner(inFile);
-            //cout << "RO function 3: " << tk.tokenInstant <<endl;
 		    return node;
 		}
 		else
@@ -748,41 +739,43 @@ Node* RO(ifstream &inFile){
 		error(tk);
 	return node;
 }
+
+
+
+
+
 /* function to check if a variable has been previously defined globally, if it has not, defines it */
 bool insert(string str){
-    //if(scopeFlag == true)
-        //return true;
-
-    if(!scopeFlag){
-    if(find (global.begin(),global.end(),str)!= global.end()){
-        //cout << "Global scoping issues with declaring var: " << str <<endl;
-        error(tk);
-    }
-    else {
-        global.insert(global.begin(), str);
-        //cout << "Global variable " << str << ": declared" <<endl;
-    }
-    return true;
+    
+	int n=find(str);
+		
+    if(n<blockv[blockvindex]){
+		cout<<" This variable has already been declared in this scope";
+		exit(1);
+		return false;
     }
     else{
-        push(str);
-        varCount++;
+        global.push_back(str);
+        blockv[blockvindex]++;
         return true;
     }
 }
+
+
+
+
+
 
 
 bool verify(string str){
 
     if(find (global.begin(),global.end(),str)!= global.end()){
-        //cout << "Global variable " << str << ": implemented" <<endl;
         return true;
     }
     else {
-        //cout << "verify";
+		cout<<"variable not defined in this scope";
 		for (std::vector<string>::const_iterator i = global.begin(); i != global.end(); ++i)
-			std::cout << "global vector: " << *i << ' ';
-        //cout << "Global scoping issues with using var: " << str << endl;
+			//std::cout << "global vector: " << *i << ' ';
         error(tk);
 
     }
@@ -790,38 +783,51 @@ bool verify(string str){
 
 }
 
+
+
+
+
+
 void push(string str){
     global.push_back(str);
 }
+
+
+
 
 void pop(){
 	//for (std::vector<string>::const_iterator i = global.begin(); i != global.end(); ++i)
 	//	std::cout << "global vector: " << *i << ' ';
     global.pop_back();
     }
-    int find(string str){
-
-        int count = 0;
-        string temp[count];
-        //cout << "string in find " <<  str <<endl;
-        vector<string>::iterator it;
-        it =(find (global.begin(),global.end(),str));
-        if(it != global.end()){
-            while (global.back() != str)
-            {
-                if(global.back() != str) {
-                    temp[count] = global.back();
-                }
-
-                pop();
-                count++;
-            }
+	
+	
+	
+	
+int find(string str){
+		int flag=0;
+		int stackindex=0;
+		int mycount=0;
+        
+		/*
             for(int i = 0; i < count; i++){
                 global.push_back(temp[0]);
-            }
+            } */
+			
+			for(int index=global.size()-1;index>=0;index--){
+				if(global[index]==str){
+					stackindex=index;
+					flag=1;
+				}
+				mycount++;
+				
+			}
 
-            //cout << count << endl;
-            return count;
+         if(flag==1){
+			//cout<<"\n the index is "<<stackindex;
+
+			//cout<<"\n the count is "<<mycount;
+            return (mycount-1)-stackindex;
         }
         else{
             //cout << "Couldnt find " << str << endl;
@@ -829,6 +835,9 @@ void pop(){
         }
     }
 
+	
+	
+	
 //static void recGen(Node *stats,fstream &outFile)
 //{
 //    char label[20], label2[20], argR[20];

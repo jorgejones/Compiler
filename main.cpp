@@ -72,6 +72,7 @@ int main(int argc, char * argv[])
 		 }
 
 inFile.close();
+outFile.close();
 //remove("out.text");
 
 return 0;
