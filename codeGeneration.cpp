@@ -407,7 +407,7 @@ else if (root->label=="M") {
     }else if (root->label== "RO")
 	{
 						string string1;
-						string string2;
+						string string2;	
 
 						if(root->child2==NULL){
 							if (root->child1->token.tokenInstant == "<"){
@@ -425,12 +425,12 @@ else if (root->label=="M") {
 						}else{
 							if (root->child1->token.tokenInstant == "<"){
 							
-								branch= "\nBRPOS\t";//+string(label2);
+								branch= "\nBRNEG\t";//+string(label2);
 								branch2="\nBRZERO\t";//+string(label2);
 								
 							}else if(root->child1->token.tokenInstant == ">"){
 							
-								branch= "\nBRNEG\t";//+string(label2);
+								branch= "\nBRPOS\t";//+string(label2);
 								branch2="\nBRZERO\t";//+string(label2);
 								
 								/*

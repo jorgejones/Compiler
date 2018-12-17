@@ -1,16 +1,19 @@
 void
-let x = 0
-let y = 0
+let x = 0 
 begin
+  let w = 0 
+  read ( w ) :
   read ( x ) :
-  iter ( x > 0 )
- begin
-    y = x :
-    iter ( y >  0 )
+  begin
+    let x = 0 
+    read ( x ) :
     begin
-     print ( y ):
-     y = y - 1 :
+      let x = 0 
+      read ( x ) :
+      print ( x ) :
     end
-    x = x - 1 :
+    print ( x ) :
   end
-end
+  print ( x ) :
+  print ( w ) :
+ens
