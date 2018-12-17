@@ -28,7 +28,7 @@ void error(string label,string token){
 void codeGenerate(Node *root, fstream &outFile) {
 
     //outFile << "\tREAD\t%s\n" << root->token.tokenInstant;
-    cout << root->label << endl;
+    //cout << root->label << endl;
     //Token token = root -> token;
 //    cout << root->child2->child2->child1->label << endl; //stat
 //    int counter = 0;
@@ -66,12 +66,12 @@ void codeGenerate(Node *root, fstream &outFile) {
 	
     else if (root->label == "vars")
     {
-        cout << "VARS" <<endl;
+        //cout << "VARS" <<endl;
 
 		if(root->child3!=NULL){
-			cout << "\tchild1: " << root->child1->label <<"\n";
-			cout << "\tchild2: " << root->child2->label <<"\n";
-			cout << "\tchild3: " << root->child3->label <<"\n";
+			//cout << "\tchild1: " << root->child1->label <<"\n";
+			//cout << "\tchild2: " << root->child2->label <<"\n";
+			//cout << "\tchild3: " << root->child3->label <<"\n";
         outFile<<"\nLOAD\t"<<root->child3->token.tokenInstant;
 		outFile<<"\nPUSH";
 		outFile<<"\nSTACKW\t"<<0;
@@ -84,9 +84,9 @@ void codeGenerate(Node *root, fstream &outFile) {
 
     }else if (root->label == "block")
     {
-        cout << "BLOCK" <<endl;
-		cout << "\tchild1: " << root->child1->label <<"\n";
-		cout << "\tchild2: " << root->child2->label <<"\n";
+        //cout << "BLOCK" <<endl;
+		//cout << "\tchild1: " << root->child1->label <<"\n";
+		//cout << "\tchild2: " << root->child2->label <<"\n";
 		if(root->child1!=NULL)
 			codeGenerate(root->child1, outFile);
 		codeGenerate(root->child2, outFile);
@@ -98,17 +98,17 @@ void codeGenerate(Node *root, fstream &outFile) {
 	
     else if (root->label == "stat")
     {
-        cout << "STAT";
-		cout << "\tchild1: " << root->child1->label <<"\n";
+        //cout << "STAT";
+		//cout << "\tchild1: " << root->child1->label <<"\n";
         codeGenerate(root->child1, outFile);
 		
 		return;
 
     }else if (root->label == "stats")
     {
-        cout << "STATS";
-		cout << "\tchild1: " << root->child1->label <<"\n";
-		cout << "\tchild2: " << root->child2->label <<"\n";
+        //cout << "STATS";
+		//cout << "\tchild1: " << root->child1->label <<"\n";
+		//cout << "\tchild2: " << root->child2->label <<"\n";
         codeGenerate(root->child1, outFile);
         codeGenerate(root->child2, outFile);
 		
@@ -116,15 +116,15 @@ void codeGenerate(Node *root, fstream &outFile) {
 
     }else if (root->label == "mStat")
     {
-        cout << "MSTAT";
+        //cout << "MSTAT";
 		if(root->child1==NULL){
-			cout << " root-> child1 == NUll\n";
+			//cout << " root-> child1 == NUll\n";
 			//return;
 
 		}
 		else {
-			cout << "\tchild1: " << root->child1->label <<"\n";
-			cout << "\tchild2: " << root->child2->label <<"\n";
+			//cout << "\tchild1: " << root->child1->label <<"\n";
+			//cout << "\tchild2: " << root->child2->label <<"\n";
 			codeGenerate(root->child1, outFile);
 			codeGenerate(root->child2, outFile);
 			//return;
@@ -134,7 +134,7 @@ void codeGenerate(Node *root, fstream &outFile) {
     }
    else if (root->label == "in")
     {
-        cout << "IN";
+        //cout << "IN";
 		
 		
 			//cout <<<<"in here now";
@@ -156,12 +156,12 @@ void codeGenerate(Node *root, fstream &outFile) {
 
     }else if (root->label == "out")
     {
-        cout << "OUT";
+        //cout << "OUT";
 		strcpy(argR,newName(VAR));
 		string arg=argR;
 		//if(root->child1!=NULL)
         codeGenerate(root->child1, outFile);
-		cout << "\tchild1: " << root->child1->label <<"\n";
+		//cout << "\tchild1: " << root->child1->label <<"\n";
 		strcpy(argR,Name);
         outFile << "\nSTORE\t"<<argR << endl;
         outFile << "\nWRITE\t"<< argR << endl;
@@ -171,7 +171,7 @@ void codeGenerate(Node *root, fstream &outFile) {
     }else if (root->label == "cond")
     {
 		
-        cout << "COND";
+        //cout << "COND";
 		strcpy(label2,newName(LABEL));
 		string mylabel=label2;
 		
@@ -186,11 +186,11 @@ void codeGenerate(Node *root, fstream &outFile) {
 		
 		
 		codeGenerate(root->child1, outFile);
-		cout << "\t****child2: " << root->child1->label <<"\n";
+		//cout << "\t****child2: " << root->child1->label <<"\n";
 		outFile<<"\nSTORE\t"<<arg;
 		
 		codeGenerate(root->child3, outFile);
-		cout << "\t***child3: " << root->child3->label <<"\n";
+		//cout << "\t***child3: " << root->child3->label <<"\n";
 		outFile<<"\nSUB\t"<<arg;
 		
 		outFile<<branch<<mylabel;
@@ -209,7 +209,7 @@ void codeGenerate(Node *root, fstream &outFile) {
 
     }
     else if (root->label == "assign") {
-        cout << "ASSIGN";
+        //cout << "ASSIGN";
 		
 
                     codeGenerate(root->child3, outFile);
@@ -223,41 +223,41 @@ void codeGenerate(Node *root, fstream &outFile) {
 
 }
   else if (root->label == "A") {
-                    cout << "A" <<endl;
+                    //cout << "A" <<endl;
 
 					if(root->child3!=NULL){
 						codeGenerate(root->child3, outFile);
-						cout << "\tchild3: " << root->child3->label <<"\n";
+						//cout << "\tchild3: " << root->child3->label <<"\n";
 						strcpy(argR, newName(VAR));
 						string arg=argR;
 						outFile << "\nSTORE\t" << arg<<endl;
 						
 						
 						codeGenerate(root->child1, outFile);
-						cout << "\tchild1: " << root->child1->label <<"\n";
+						//cout << "\tchild1: " << root->child1->label <<"\n";
 
 							if (root->child2->token.tokenInstant == "+"){
 								outFile << "\nADD\t" << arg << endl;
-								cout << "\tchild2: " << root->child2->label <<"\n";
+								//cout << "\tchild2: " << root->child2->label <<"\n";
 							}
 							else if (root->child2->token.tokenInstant == "-") {
-								cout << "\tchild2: " << root->child2->label <<"\n";
+								//cout << "\tchild2: " << root->child2->label <<"\n";
 								outFile << "\nSUB\t" << arg << endl;
 							}
 							else {
-								cout << "error in expression node" << endl;
+								//cout << "error in expression node" << endl;
 							}
 						}
 						else{
 						codeGenerate(root->child1, outFile);
-						cout << "\tchild1: " << root->child1->label <<"\n";
+						//cout << "\tchild1: " << root->child1->label <<"\n";
 						}
 					
 						
 		return;			
 }
 else if (root->label=="M") {
-        cout << "M" <<endl;
+        //cout << "M" <<endl;
 		/*
 		cout << "\tchild1: " << root->child1->label <<"\n";
 		cout << "\tchild2: " << root->child2->label <<"\n";
@@ -270,71 +270,71 @@ else if (root->label=="M") {
 		}
 		else if(root->child1->label == "-"){
 
-			cout << "\tchild1: " << root->child1->label <<"\n";
+			//cout << "\tchild1: " << root->child1->label <<"\n";
 			codeGenerate(root->child2, outFile);
-			cout<<" \nchild 2 label "<<root->child2->label;
+			//cout<<" \nchild 2 label "<<root->child2->label;
 			outFile << "\nMULT\t" << "-1" << endl;
 		}
 		return;
 
     }
      else if (root->label == "expr") {
-        cout << "EXPR" <<endl;
+        //cout << "EXPR" <<endl;
 
 		if(root->child3!=NULL){
 			codeGenerate(root->child3, outFile);
-			cout << "\tchild3: " << root->child3->label <<"\n";
+			//cout << "\tchild3: " << root->child3->label <<"\n";
 			strcpy(argR, newName(VAR));
 			string arg=argR;
 			outFile << "\nSTORE\t"<<arg<<endl;
 			if(root->child1!=NULL)
 			codeGenerate(root->child1, outFile);
-			cout << "\tchild1: " << root->child1->label <<"\n";
+			//cout << "\tchild1: " << root->child1->label <<"\n";
 
 
 			if (root->child2->token.tokenInstant == "*"){
-				cout << "\tchild2: " << root->child2->label <<"\n";
+				//cout << "\tchild2: " << root->child2->label <<"\n";
 				outFile << "\nMULT\t" << arg << endl;
 
 			}
 			else if (root->child2->token.tokenInstant == "/") {
-				cout << "\tchild2: " << root->child2->label <<"\n";
+				//cout << "\tchild2: " << root->child2->label <<"\n";
 				outFile << "\nDIV\t" << arg << endl;
 			}
 			else {
-				cout << "error in expression node" << endl;
+				//cout << "error in expression node" << endl;
 			}
 		}else{
-			cout << "\tchild1: " << root->child1->label <<"\n";
+			//cout << "\tchild1: " << root->child1->label <<"\n";
 			codeGenerate(root->child1, outFile);
-			cout << "\tchild1: " << root->child1->label <<"\n";
+			//cout << "\tchild1: " << root->child1->label <<"\n";
 
 		}
 		
 		return;
     } else if (root->label == "R") {
-        cout << "R" <<endl;
+        //cout << "R" <<endl;
 
 		if(root->child1!=NULL){
 			codeGenerate(root->child1, outFile);
-			cout << "\tchild1: " << root->child1->label <<"\n";
+			//cout << "\tchild1: " << root->child1->label <<"\n";
 		}
 		else if(root->child2!=NULL){
 			codeGenerate(root->child2, outFile);
-			cout << "\tchild2: " << root->child1->label <<"\n";
+			//cout << "\tchild2: " << root->child1->label <<"\n";
 		}
 		
 		else if(root->child3!=NULL){
-			cout << "\tchild3: " << root->child3->label <<"\n";
+			//cout << "\tchild3: " << root->child3->label <<"\n";
 			if(root->index[0]>=0){
-				cout << "\tchild3: " << root->child3->label <<"\n";
+				//cout << "\tchild3: " << root->child3->label <<"\n";
 				outFile<<"\nSTACKR\t"<<root->index[0];
 			}
 			
 		}
 		
 		else if(root->child4!=NULL){
-			cout << "\tchild4: " << root->child4->label <<"\n";
+			//cout << "\tchild4: " << root->child4->label <<"\n";
 			outFile<<"\nLOAD\t"<<root->child4->token.tokenInstant;
 
 			
@@ -347,19 +347,19 @@ else if (root->label=="M") {
     }else if (root->label == "loop")
     {
 		
-        cout << "LOOP";
+        //cout << "LOOP";
 		strcpy(label,newName(LABEL));
 		string mylabel=label;
 		
 		
 		strcpy(label2,newName(LABEL));
-		//cout<<" THE LABEL 2 is!"<<label2;
+		////cout<<" THE LABEL 2 is!"<<label2;
 		string mylabel2=label2;
 		
 		outFile<<"\n"<<mylabel<<": NOOP\n";  //loop condition
 		
 		//expr
-		cout << "\tchild1: " << root->child1->label <<"\n";
+		//cout << "\tchild1: " << root->child1->label <<"\n";
         codeGenerate(root->child1, outFile);  //x
 		strcpy(argR,newName(VAR));
 		string arg=argR;
@@ -368,13 +368,13 @@ else if (root->label=="M") {
 		
 		
 		//RO
-		cout << "\tchild2: " << root->child2->label <<"\n";
+		//cout << "\tchild2: " << root->child2->label <<"\n";
 		codeGenerate(root->child2, outFile);  //operator
 
 		//strcpy(argR,newName(VAR));
 		//string arg2=argR;
 		//outFile<<"\nin loop:\tSTORE\t"<<arg2; // store operator??
-		cout << "\tchild3: " << root->child2->label <<"\n";
+		//cout << "\tchild3: " << root->child2->label <<"\n";
 		
 		//expression
 		codeGenerate(root->child3, outFile); // s
@@ -470,7 +470,7 @@ static void generate(Node *root,Node *st,fstream &outFile)
     int i;
     if (root==NULL || root->label == "program" || root->child1 == NULL ||
         root->child1->label != "block")
-        cout << "something wrong with parse tree in generate" << endl;
+        //cout << "something wrong with parse tree in generate" << endl;
     codeGenerate(root->child1->child2,outFile);     /* child1->child2 points to statList */
     //fprintf(outFile,"\tSTOP\n");
     outFile << "\tSTOP\n";

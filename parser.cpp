@@ -59,8 +59,7 @@ Node* parser(ifstream &inFile){
 
 
 	root=program(inFile);
-    cout << "File parsed! " <<endl;
-    file.close();
+    //cout << "File parsed! " <<endl;
 
 	return root;
 }

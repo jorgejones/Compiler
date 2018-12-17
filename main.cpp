@@ -65,7 +65,7 @@ int main(int argc, char * argv[])
 			 tree = parser(inFile);
 
 			 int depth = 0;
-			printTree(tree,depth);
+			//printTree(tree,depth);
 			 //recGen(tree,outFile);
 			 //generateCode(tree, outFile);
 			 codeGenerate(tree,outFile);
